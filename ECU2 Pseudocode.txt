@@ -1,0 +1,28 @@
+
+void main(void)
+{
+	sys_init();
+	while(1){
+		BCM_GetData();
+		if(Door_State == Open && Speed_state > 0)
+		{	
+			Buzzer_Update(On);
+			Light_Update(Off);
+		}
+		if(Door_State == close && Light_State == On)
+		{
+			if(Time_ms > 3)
+				Light_Update(Off);
+		}	
+		if(Speed_state > 0 && Light_State == On)
+		{
+			Buzzer_Update(Off);
+			Light_Update(On);
+		}
+		if(Speed_state == 0 && Light_State == On)
+		{
+			Buzzer_Update(On);
+			Light_Update(On);
+		}
+	}
+}
